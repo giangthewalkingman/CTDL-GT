@@ -1,6 +1,6 @@
 set(_CATKIN_CURRENT_PACKAGE "offboard")
 set(offboard_VERSION "0.0.0")
-set(offboard_MAINTAINER "congtranv <giangsouleater@gmail.com>")
+set(offboard_MAINTAINER "giang <giangsouleater@gmail.com>")
 set(offboard_PACKAGE_FORMAT "2")
 set(offboard_BUILD_DEPENDS "geometry_msgs" "mavros_msgs" "roscpp" "roslaunch" "std_msgs" "nav_msgs" "message_generation")
 set(offboard_BUILD_EXPORT_DEPENDS "geometry_msgs" "mavros_msgs" "roscpp" "roslaunch" "std_msgs" "nav_msgs")
