@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/share/roseus/ros/offboard/manifest.l"
-  "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/share/roseus/ros/offboard/msg/FlatTarget.l"
   "CMakeFiles/offboard_generate_messages_eus"
 )
 

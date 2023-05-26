@@ -129,27 +129,11 @@ file(INSTALL DESTINATION "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/insta
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/offboard/msg" TYPE FILE FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/msg/FlatTarget.msg")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/offboard/cmake" TYPE FILE FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard/catkin_generated/installspace/offboard-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/include/offboard")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/share/roseus/ros/offboard")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/share/common-lisp/ros/offboard")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/share/gennodejs/ros/offboard")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -177,18 +161,6 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/offboard" TYPE FILE FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/package.xml")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/offboard" TYPE PROGRAM FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard/catkin_generated/installspace/MarkerDetection.py")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/offboard" TYPE PROGRAM FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard/catkin_generated/installspace/real_cam.py")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/offboard" TYPE PROGRAM FILES "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard/catkin_generated/installspace/transform.py")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

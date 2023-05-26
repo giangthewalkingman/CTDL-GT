@@ -8,9 +8,6 @@
 
 # modified environment variables
 export CMAKE_PREFIX_PATH="/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD='/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard'
-export PYTHONPATH="/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages:$PYTHONPATH"
 export ROSLISP_PACKAGE_DIRECTORIES="/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
 export ROS_PACKAGE_PATH="/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard:$ROS_PACKAGE_PATH"

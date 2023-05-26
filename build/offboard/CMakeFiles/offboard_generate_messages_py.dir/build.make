@@ -53,25 +53,6 @@ CMAKE_BINARY_DIR = /home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboa
 # Include the progress variables for this target.
 include CMakeFiles/offboard_generate_messages_py.dir/progress.make
 
-CMakeFiles/offboard_generate_messages_py: /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/_FlatTarget.py
-CMakeFiles/offboard_generate_messages_py: /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/__init__.py
-
-
-/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/_FlatTarget.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/_FlatTarget.py: /home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/msg/FlatTarget.msg
-/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/_FlatTarget.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/_FlatTarget.py: /opt/ros/noetic/share/geometry_msgs/msg/Vector3.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG offboard/FlatTarget"
-	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/msg/FlatTarget.msg -Ioffboard:/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -p offboard -o /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg
-
-/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/__init__.py: /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/_FlatTarget.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python msg __init__.py for offboard"
-	catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg --initpy
-
-offboard_generate_messages_py: CMakeFiles/offboard_generate_messages_py
-offboard_generate_messages_py: /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/_FlatTarget.py
-offboard_generate_messages_py: /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/python3/dist-packages/offboard/msg/__init__.py
 offboard_generate_messages_py: CMakeFiles/offboard_generate_messages_py.dir/build.make
 
 .PHONY : offboard_generate_messages_py

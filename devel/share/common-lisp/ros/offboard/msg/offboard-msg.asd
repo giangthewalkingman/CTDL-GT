@@ -1,1 +1,0 @@
-/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/share/common-lisp/ros/offboard/msg/offboard-msg.asd

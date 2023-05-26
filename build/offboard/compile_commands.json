@@ -1,17 +1,17 @@
 [
 {
   "directory": "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard",
-  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"offboard\\\" -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/include -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -std=gnu++17 -o CMakeFiles/setmode_offb.dir/src/setmode_offb.cpp.o -c /home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/setmode_offb.cpp",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"offboard\\\" -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -std=gnu++17 -o CMakeFiles/setmode_offb.dir/src/setmode_offb.cpp.o -c /home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/setmode_offb.cpp",
   "file": "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/setmode_offb.cpp"
 },
 {
   "directory": "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard",
-  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"offboard\\\" -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/include -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -std=gnu++17 -o CMakeFiles/offboard_node.dir/src/offboard_node.cpp.o -c /home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_node.cpp",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"offboard\\\" -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -std=gnu++17 -o CMakeFiles/offboard_node.dir/src/offboard_node.cpp.o -c /home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_node.cpp",
   "file": "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_node.cpp"
 },
 {
   "directory": "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/build/offboard",
-  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"offboard\\\" -Doffboard_lib_EXPORTS -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/include -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -fPIC   -std=gnu++17 -o CMakeFiles/offboard_lib.dir/src/offboard_lib.cpp.o -c /home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"offboard\\\" -Doffboard_lib_EXPORTS -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -fPIC   -std=gnu++17 -o CMakeFiles/offboard_lib.dir/src/offboard_lib.cpp.o -c /home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp",
   "file": "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp"
 },
 {
