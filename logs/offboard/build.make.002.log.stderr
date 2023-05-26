@@ -1,0 +1,27 @@
+In file included from [01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:1[m[K:
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include/offboard/offboard.h:109:50:[m[K [01;31m[Kerror: [m[Kexpected identifier before numeric constant
+  109 |  std::vector<geometry_msgs::PoseStamped> targets([01;31m[K5[m[K);
+      |                                                  [01;31m[K^[m[K
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include/offboard/offboard.h:109:50:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K...[m[K’ before numeric constant
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:[m[K In member function ‘[01m[Kvoid OffboardControl::inputENUYawAndLandingSetpoint()[m[K’:
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:197:34:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[K<unresolved overloaded function type>[int][m[K’ for array subscript
+  197 |             std::cin >> targets[i[01;31m[K][m[K.pose.position.x >> targets[i].pose.position.y >> targets[i].pose.position.z;
+      |                                  [01;31m[K^[m[K
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:197:64:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[K<unresolved overloaded function type>[int][m[K’ for array subscript
+  197 |             std::cin >> targets[i].pose.position.x >> targets[i[01;31m[K][m[K.pose.position.y >> targets[i].pose.position.z;
+      |                                                                [01;31m[K^[m[K
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:197:94:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[K<unresolved overloaded function type>[int][m[K’ for array subscript
+  197 |             std::cin >> targets[i].pose.position.x >> targets[i].pose.position.y >> targets[i[01;31m[K][m[K.pose.position.z;
+      |                                                                                              [01;31m[K^[m[K
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:198:60:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[K<unresolved overloaded function type>[int][m[K’ for array subscript
+  198 |             std::cout << "Target " << i <<": " << targets[i[01;31m[K][m[K.pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i].pose.position.z << std::endl;
+      |                                                            [01;31m[K^[m[K
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:198:98:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[K<unresolved overloaded function type>[int][m[K’ for array subscript
+  198 |             std::cout << "Target " << i <<": " << targets[i].pose.position.x << ", " << targets[i[01;31m[K][m[K.pose.position.y << ", " << targets[i].pose.position.z << std::endl;
+      |                                                                                                  [01;31m[K^[m[K
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:198:136:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[K<unresolved overloaded function type>[int][m[K’ for array subscript
+  198 |             std::cout << "Target " << i <<": " << targets[i].pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i[01;31m[K][m[K.pose.position.z << std::endl;
+      |                                                                                                                                        [01;31m[K^[m[K
+make[2]: *** [CMakeFiles/offboard_lib.dir/build.make:63: CMakeFiles/offboard_lib.dir/src/offboard_lib.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:461: CMakeFiles/offboard_lib.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

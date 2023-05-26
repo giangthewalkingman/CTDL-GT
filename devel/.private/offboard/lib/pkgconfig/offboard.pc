@@ -1,0 +1,8 @@
+prefix=/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard
+
+Name: offboard
+Description: Description of offboard
+Version: 0.0.0
+Cflags: -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/include -I/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include
+Libs: -L${prefix}/lib 
+Requires: geometry_msgs mavros_msgs roscpp rospy std_msgs nav_msgs message_runtime

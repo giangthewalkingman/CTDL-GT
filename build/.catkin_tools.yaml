@@ -1,0 +1,6 @@
+devel_space: /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel
+install: false
+install_space: /home/giang/Desktop/cg_enu_yaw_landing_setpoints/install
+profile: default
+source_space: /home/giang/Desktop/cg_enu_yaw_landing_setpoints/src
+workspace: /home/giang/Desktop/cg_enu_yaw_landing_setpoints

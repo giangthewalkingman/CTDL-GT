@@ -1,0 +1,35 @@
+[35m[1mScanning dependencies of target offboard_lib[0m
+[  0%] Built target geometry_msgs_generate_messages_cpp
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_py
+[ 15%] Built target setmode_offb
+[ 15%] Built target std_msgs_generate_messages_nodejs
+[ 15%] Built target geometry_msgs_generate_messages_lisp
+[ 15%] Built target geometry_msgs_generate_messages_nodejs
+[ 15%] Built target std_msgs_generate_messages_eus
+[ 23%] [32mBuilding CXX object CMakeFiles/offboard_lib.dir/src/offboard_lib.cpp.o[0m
+[ 23%] Built target std_msgs_generate_messages_lisp
+[ 23%] Built target _offboard_generate_messages_check_deps_FlatTarget
+[ 23%] Built target geometry_msgs_generate_messages_eus
+[ 30%] Built target offboard_generate_messages_nodejs
+[ 46%] Built target offboard_generate_messages_eus
+[ 53%] Built target offboard_generate_messages_cpp
+[ 69%] Built target offboard_generate_messages_py
+[ 76%] Built target offboard_generate_messages_lisp
+[ 76%] Built target offboard_generate_messages
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:[m[K In destructor ‘[01m[KStack::~Stack()[m[K’:
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:665:11:[m[K [01;35m[Kwarning: [m[Kconverting to non-pointer type ‘[01m[Kint[m[K’ from NULL [[01;35m[K-Wconversion-null[m[K]
+  665 |     cap = [01;35m[KNULL[m[K;
+      |           [01;35m[K^~~~[m[K
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:666:11:[m[K [01;35m[Kwarning: [m[Kconverting to non-pointer type ‘[01m[Kint[m[K’ from NULL [[01;35m[K-Wconversion-null[m[K]
+  666 |     top = [01;35m[KNULL[m[K;
+      |           [01;35m[K^~~~[m[K
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:[m[K In member function ‘[01m[Kint Stack::pop()[m[K’:
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:701:23:[m[K [01;35m[Kwarning: [m[Kconverting to non-pointer type ‘[01m[Kint[m[K’ from NULL [[01;35m[K-Wconversion-null[m[K]
+  701 |         objPtr[top] = [01;35m[KNULL[m[K;
+      |                       [01;35m[K^~~~[m[K
+[ 84%] [32m[1mLinking CXX shared library /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/liboffboard_lib.so[0m
+[ 84%] Built target offboard_lib
+[ 92%] [32m[1mLinking CXX executable /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/offboard/offboard_node[0m
+[100%] Built target offboard_node

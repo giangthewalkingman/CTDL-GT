@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "${default}",
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/include/**",
+                "/opt/ros/noetic/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/eigen_checks/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/ewok_optimization/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/ewok_poly_spline/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/ewok_ring_buffer/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/mav_comm/mav_msgs/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/mav_comm/mav_planning_msgs/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/mav_trajectory_generation/mav_trajectory_generation/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/mav_trajectory_generation/mav_trajectory_generation_example/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/mav_trajectory_generation/mav_trajectory_generation_ros/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/mav_trajectory_generation/mav_visualization/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/nlopt/include/**",
+                "/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include/**",
+                "/usr/include/**",
+                "${workspaceFolder}/src/offboard/include"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++14",
+            "configurationProvider": "b2.catkin_tools"
+        }
+    ],
+    "version": 4
+}

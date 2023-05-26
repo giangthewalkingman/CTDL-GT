@@ -1,0 +1,10 @@
+[01m[Kc++:[m[K [01;31m[Kerror: [m[Kc++17: No such file or directory
+[01m[Kc++:[m[K [01;31m[Kerror: [m[Kc++17: No such file or directory
+[01m[Kc++:[m[K [01;31m[Kerror: [m[Kunrecognized command line option ‘[01m[K-std[m[K’
+make[2]: *** [CMakeFiles/setmode_offb.dir/build.make:63: CMakeFiles/setmode_offb.dir/src/setmode_offb.cpp.o] Error 1
+[01m[Kc++:[m[K [01;31m[Kerror: [m[Kunrecognized command line option ‘[01m[K-std[m[K’
+make[1]: *** [CMakeFiles/Makefile2:214: CMakeFiles/setmode_offb.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/offboard_lib.dir/build.make:63: CMakeFiles/offboard_lib.dir/src/offboard_lib.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:461: CMakeFiles/offboard_lib.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2
