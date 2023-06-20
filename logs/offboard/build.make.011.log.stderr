@@ -1,0 +1,27 @@
+In file included from [01m[K/usr/include/strings.h:23[m[K,
+                 from [01m[K/usr/include/string.h:432[m[K,
+                 from [01m[K/usr/include/c++/9/cstring:42[m[K,
+                 from [01m[K/usr/include/boost/math/policies/error_handling.hpp:14[m[K,
+                 from [01m[K/usr/include/boost/math/special_functions/round.hpp:14[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/time.h:58[m[K,
+                 from [01m[K/opt/ros/noetic/include/ros/ros.h:38[m[K,
+                 from [01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include/offboard/offboard.h:4[m[K,
+                 from [01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:1[m[K:
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:[m[K In member function ‘[01m[Kgeometry_msgs::PoseStamped ArrayQueue::deQueue()[m[K’:
+[01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:489:23:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator=[m[K’ (operand types are ‘[01m[Kgeometry_msgs::PoseStamped[m[K’ {aka ‘[01m[Kgeometry_msgs::PoseStamped_<std::allocator<void> >[m[K’} and ‘[01m[Klong int[m[K’)
+  489 |         qArr[front] = [01;31m[KNULL[m[K;
+      |                       [01;31m[K^~~~[m[K
+In file included from [01m[K/opt/ros/noetic/include/tf/transform_datatypes.h:40[m[K,
+                 from [01m[K/opt/ros/noetic/include/tf/time_cache.h:38[m[K,
+                 from [01m[K/opt/ros/noetic/include/tf/tf.h:44[m[K,
+                 from [01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/include/offboard/offboard.h:5[m[K,
+                 from [01m[K/home/giang/Desktop/cg_enu_yaw_landing_setpoints/src/offboard/src/offboard_lib.cpp:1[m[K:
+[01m[K/opt/ros/noetic/include/geometry_msgs/PoseStamped.h:24:8:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kgeometry_msgs::PoseStamped_<std::allocator<void> >& geometry_msgs::PoseStamped_<std::allocator<void> >::operator=(const geometry_msgs::PoseStamped_<std::allocator<void> >&)[m[K’
+   24 | struct [01;36m[KPoseStamped_[m[K
+      |        [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/geometry_msgs/PoseStamped.h:24:8:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Klong int[m[K’ to ‘[01m[Kconst geometry_msgs::PoseStamped_<std::allocator<void> >&[m[K’
+[01m[K/opt/ros/noetic/include/geometry_msgs/PoseStamped.h:24:8:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kgeometry_msgs::PoseStamped_<std::allocator<void> >& geometry_msgs::PoseStamped_<std::allocator<void> >::operator=(geometry_msgs::PoseStamped_<std::allocator<void> >&&)[m[K’
+[01m[K/opt/ros/noetic/include/geometry_msgs/PoseStamped.h:24:8:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Klong int[m[K’ to ‘[01m[Kgeometry_msgs::PoseStamped_<std::allocator<void> >&&[m[K’
+make[2]: *** [CMakeFiles/offboard_lib.dir/build.make:63: CMakeFiles/offboard_lib.dir/src/offboard_lib.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:458: CMakeFiles/offboard_lib.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

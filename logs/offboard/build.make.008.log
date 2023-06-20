@@ -1,21 +1,21 @@
 [35m[1mScanning dependencies of target offboard_lib[0m
-[  0%] Built target geometry_msgs_generate_messages_cpp
 [  0%] Built target std_msgs_generate_messages_cpp
-[  0%] Built target geometry_msgs_generate_messages_nodejs
-[  0%] Built target std_msgs_generate_messages_py
 [  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target geometry_msgs_generate_messages_nodejs
+[  0%] Built target geometry_msgs_generate_messages_cpp
 [  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_py
 [ 28%] Built target setmode_offb
-[ 42%] [32mBuilding CXX object CMakeFiles/offboard_lib.dir/src/offboard_lib.cpp.o[0m
-[ 42%] Built target geometry_msgs_generate_messages_lisp
-[ 42%] Built target std_msgs_generate_messages_lisp
-[ 42%] Built target geometry_msgs_generate_messages_eus
-[ 42%] Built target std_msgs_generate_messages_eus
-[ 42%] Built target offboard_generate_messages_cpp
-[ 42%] Built target offboard_generate_messages_nodejs
-[ 42%] Built target offboard_generate_messages_py
-[ 42%] Built target offboard_generate_messages_lisp
+[ 28%] Built target geometry_msgs_generate_messages_eus
+[ 28%] Built target geometry_msgs_generate_messages_lisp
+[ 28%] Built target std_msgs_generate_messages_lisp
+[ 28%] Built target std_msgs_generate_messages_eus
+[ 28%] Built target offboard_generate_messages_cpp
+[ 28%] Built target offboard_generate_messages_py
+[ 28%] Built target offboard_generate_messages_nodejs
+[ 57%] Built target offboard_generate_messages_lisp
 [ 57%] Built target offboard_generate_messages_eus
+[ 57%] [32mBuilding CXX object CMakeFiles/offboard_lib.dir/src/offboard_lib.cpp.o[0m
 [ 57%] Built target offboard_generate_messages
 [ 71%] [32m[1mLinking CXX shared library /home/giang/Desktop/cg_enu_yaw_landing_setpoints/devel/.private/offboard/lib/liboffboard_lib.so[0m
 [ 71%] Built target offboard_lib

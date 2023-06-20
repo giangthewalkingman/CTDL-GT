@@ -2,12 +2,10 @@
 #include "offboard/queue.h"
 #include <stack>
 
-
+//constructor of Offboard class
 OffboardControl::OffboardControl(const ros::NodeHandle &nh, const ros::NodeHandle &nh_private, bool input_setpoint) : nh_(nh),
-                                                                                                                      nh_private_(nh_private),
-                                                                                                                      simulation_mode_enable_(false),
-                                                                                                                      delivery_mode_enable_(false),
-                                                                                                                      return_home_mode_enable_(false) {
+                                                                                                                      nh_private_(nh_private)                                        
+                                                                                                                      {
     state_sub_ = nh_.subscribe("/mavros/state", 10, &OffboardControl::stateCallback, this);
     odom_sub_ = nh_.subscribe("/mavros/local_position/odom", 10, &OffboardControl::odomCallback, this);
     setpoint_pose_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_position/local", 10);
@@ -74,11 +72,8 @@ void OffboardControl::setOffboardStream(double hz, geometry_msgs::PoseStamped fi
     std::printf("[ INFO] Setting OFFBOARD stream \n");
     for (int i = 50; ros::ok() && i > 0; --i) {
         target_enu_pose_ = first_target;
-        // std::printf("\n[ INFO] first_target ENU position: [%.1f, %.1f, %.1f]\n", target_enu_pose_.pose.position.x, target_enu_pose_.pose.position.y, target_enu_pose_.pose.position.z);
         target_enu_pose_.header.stamp = ros::Time::now();
-        // std::printf("\n[ INFO] second ENU position: [%.1f, %.1f, %.1f]\n", target_enu_pose_.pose.position.x, target_enu_pose_.pose.position.y, target_enu_pose_.pose.position.z);
         setpoint_pose_pub_.publish(target_enu_pose_);
-        // std::printf("\n[ INFO] publish ENU position: [%.1f, %.1f, %.1f]\n", target_enu_pose_.pose.position.x, target_enu_pose_.pose.position.y, target_enu_pose_.pose.position.z);
         ros::spinOnce();
         rate.sleep();
     }
@@ -152,16 +147,12 @@ void OffboardControl::inputENUYawAndLandingSetpoint() {
         point_to_push.pose.position.x = x;
         point_to_push.pose.position.y = y;
         point_to_push.pose.position.z = z;
-        targets.push_back(point_to_push);
-        //yaw_target_.push_back(yaw);
-        //std::cin >> targets[i].pose.position.x >> targets[i].pose.position.y >> targets[i].pose.position.z;
-        std::cout << "Point to push " << i <<": " << point_to_push.pose.position.x << ", " << point_to_push.pose.position.y << ", " << point_to_push.pose.position.z << std::endl;
-        std::cout << "Target " << i <<": " << targets[i].pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i].pose.position.z << std::endl;
+        targets.push_back(point_to_push); //push back the pose to the targets vector
         ros::spinOnce();
         rate.sleep();
     }
     for(int i = 0; i < num_of_enu_target_; i++) {
-        std::cout << "Target " << i <<": " << targets[i].pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i].pose.position.z << std::endl;
+        std::cout << "Target " << i+1 <<": " << targets[i].pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i].pose.position.z << std::endl;
     }
     std::printf(" Error to check target reached (in meter): ");
     std::cin >> target_error_;
@@ -182,15 +173,18 @@ void OffboardControl::dequeueFlight() {
     int i = 0;
     geometry_msgs::PoseStamped setpoint;
     std::cout << "Start to enqueue each setpoint to the queue..." << std::endl;
-    for(i = 0; i < num_of_enu_target_; i++) {
-        q1.enQueue(targets[i]);
+    // for(i = 0; i < num_of_enu_target_; i++) {
+    //     q1.enQueue(targets[i]);
+    // }
+    for(auto tar : targets) {
+        q1.enQueue(tar);
     }
     std::cout << "Enqueue completed!" << std::endl;
     // q1.printQueue();
     std::cout << "Start dequeueing..." << std::endl;
     i = 0;
     while (ros::ok() && target_reached) {
-        std::cout << "Dequeueing point" << i+1 << std::endl;
+        std::cout << "Dequeueing point " << i+1 << std::endl;
         target_reached = false;
         if (i < (num_of_enu_target_ - 1)) {
             final_position_reached_ = false;
@@ -479,13 +473,15 @@ void ArrayQueue::enQueue(geometry_msgs::PoseStamped x) {
 
 geometry_msgs::PoseStamped ArrayQueue::deQueue() {
     geometry_msgs::PoseStamped retObj;
+    geometry_msgs::PoseStamped emptyObj;
     if(rear==front) {
         retObj = qArr[front];
-        qArr[front] = geometry_msgs::PoseStamped();
+        qArr[front] = geometry_msgs::PoseStamped();  
     }
     else {
         retObj = qArr[front];
         qArr[front] = geometry_msgs::PoseStamped();
+        std::cout << qArr[front].pose.position.x << " " << qArr[front].pose.position.y << " " << qArr[front].pose.position.z << std::endl;
         front = (front+1)%cap;
     }
     return retObj;
@@ -499,7 +495,6 @@ void ArrayQueue::printQueue() {
     }
     else{
         for(int i = front; i <= rear; i++) {
-        //std::cout << "Setpoint["<< i << "] =" << qArr[i].pose.position.x << std::endl;
         ROS_INFO_STREAM(qArr[i]);
     }
     }

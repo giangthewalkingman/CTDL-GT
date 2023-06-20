@@ -78,7 +78,8 @@
         "core": "cpp",
         "dense": "cpp",
         "fft": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "*.ipp": "cpp"
     },
     "python.analysis.extraPaths": [
         "/opt/ros/noetic/lib/python3/dist-packages"
