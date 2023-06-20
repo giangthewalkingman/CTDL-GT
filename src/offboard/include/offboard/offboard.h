@@ -94,8 +94,8 @@ class OffboardControl
 	sensor_msgs::NavSatFix ref_gps_position_; // reference GPS position to convert GPS position to ENU position (LLA to xyz)
 	mavros_msgs::SetMode flight_mode_; // use to set custom or default flight mode (e.g., OFFBOARD, LAND, ...)
 	
-	bool opt_point_received_ = false; // check received optimization point from planner or not
-	bool gps_received_ = false; // check received GPS or not
+	// bool opt_point_received_ = false; // check received optimization point from planner or not
+	// bool gps_received_ = false; // check received GPS or not
 	bool final_position_reached_ = false; // check reached final setpoint or not
 	bool odom_received_ = false; // check received odometry or not
 	bool delivery_mode_enable_; // check enabled delivery mode or not
@@ -104,19 +104,10 @@ class OffboardControl
 	
 	int num_of_enu_target_; // number of ENU (x,y,z) setpoints
 	std::stack<int> myStack;
-	std::vector<double> x_target_; // array of ENU x position of all setpoints
-	std::vector<double> y_target_; // array of ENU y position of all setpoints 
-	std::vector<double> z_target_; // array of ENU z position of all setpoints
-
 	std::vector<geometry_msgs::PoseStamped> targets;
 	std::vector<double> yaw_target_; // array of yaw targets of all setpoints
-	double yaw_rate_;
+	// double yaw_rate_;
 	bool odom_error_;
-	double yaw_error_;
-	// int num_of_gps_goal_; // number of GPS (LLA) setpoints
-	// std::vector<double> lat_goal_; // array of latitude of all setpoints
-	// std::vector<double> lon_goal_; // array of longitude of all setpoints
-	// std::vector<double> alt_goal_; // array of altitude of all setpoints
 	
 	double target_error_, goal_error_, land_error_; // the offset to check when the drone reached the setpoints (for ENU, GPS and land, corresponding)
 	double distance_; // distance from current position to next setpoint
@@ -137,21 +128,7 @@ class OffboardControl
 	void waitForStable(double hz); // wait drone get a stable state
 	void stateCallback(const mavros_msgs::State::ConstPtr& msg); // state callback
 	void odomCallback(const nav_msgs::Odometry::ConstPtr& msg); // odometry callback
-	// void gpsPositionCallback(const sensor_msgs::NavSatFix::ConstPtr& msg); // GPS callback
-	// void optPointCallback(const geometry_msgs::Point::ConstPtr& msg); // optimization point callback
-	void targetPointCallback(const std_msgs::Float32MultiArray::ConstPtr &msg); // target point callback
-	void checkLastOptPointCallback(const std_msgs::Bool::ConstPtr &msg); //check last optimization point callback
-
-	// DuyNguyen
-	// void markerCallback(const geometry_msgs::PoseStamped::ConstPtr& msg); // call back the marker position 
-	// void checkMoveCallback(const std_msgs::Bool msg); // check move to the centre of UAV
-	// void checkIdsDetectionCallback(const std_msgs::Bool msg); // check have the ids or not ?
 	void poseCallback(const geometry_msgs::PoseStamped::ConstPtr & msg); // call back the current position
-
-	inline double degreeOf(double rad) // convert from radian to degree
-	{
-		return (rad*180)/PI;
-	}
 
 	inline double radianOf(double deg) // convert from degree to radian
 	{
@@ -164,61 +141,25 @@ class OffboardControl
         return x*x;
     }; 
 
-	void inputSetpoint(); // manage input: select mode, setpoint type, ...
-	void inputENU(); // manage input for ENU setpoint flight mode: manual input from keyboard, load setpoints
-	void enuFlight(); // perform flight with ENU (x,y,z) setpoints
-	// void inputGPS(); // manage input for GPS setpoint flight mode: manual input from keyboard, load setpoints
-	void gpsFlight(); // perform flight with GPS (LLA) setpoints
-	void inputENUYaw(); // manage input for ENU setpoint & Yaw angle
-	void enuYawFlight(); // perform flight with ENU (x,y,z) setpoints & Yaw angle
 	void inputENUYawAndLandingSetpoint(); // manage input for ENU setpoint & Yaw angle & Landing at each setpoint to drop the package
-	void enuYawFlightAndLandingSetpoint(); // perform flight with ENU (x,y,z) setpoints & Yaw angle & Landing at each setpoint to drop the package
-
-	void inputPlanner(); // manage for flight with optimization point from planner
-	void plannerFlight(); // perform flight with ENU (x,y,z) setpoints from optimization planner
-	void inputPlannerAndLanding(); // manage for flight with optimization point from planner
-	void plannerAndLandingFlight(); // perform flight with ENU (x,y,z) setpoints from optimization planner and Landing at marker
-
-	double calculateYawOffset(geometry_msgs::PoseStamped current, geometry_msgs::PoseStamped setpoint); // calculate yaw offset between current position and next optimization position
-
 	void takeOff(geometry_msgs::PoseStamped setpoint, double hover_time); // perform takeoff task
 	void hovering(geometry_msgs::PoseStamped setpoint, double hover_time); // perform hover task
 	void landing(geometry_msgs::PoseStamped setpoint); // perform land task
-	void landingYaw(geometry_msgs::PoseStamped setpoint); // perform land task & Yaw
+	// void landingYaw(geometry_msgs::PoseStamped setpoint); // perform land task & Yaw
 	
 	void returnHome(geometry_msgs::PoseStamped home_pose); // perform return home task
-	void returnHomeYaw(geometry_msgs::PoseStamped home_pose); // perform return home task & Yaw
+	// void returnHomeYaw(geometry_msgs::PoseStamped home_pose); // perform return home task & Yaw
 	void delivery(geometry_msgs::PoseStamped setpoint, double unpack_time); // perform delivery task
-	void deliveryHover(geometry_msgs::PoseStamped setpoint, double unpack_time); // perform delivery task
-	
-	sensor_msgs::NavSatFix goalTransfer(double lat, double lon, double alt); // transfer lat, lon, alt setpoint to same message type with gps setpoint msg
 	geometry_msgs::PoseStamped targetTransfer(double x, double y, double z); // transfer x, y, z setpoint to same message type with enu setpoint msg
-	geometry_msgs::PoseStamped targetTransfer(double x, double y, double z, double yaw); // transfer x, y, z (meter) and yaw (degree) setpoint to same message type with enu setpoint msg
-	geometry_msgs::PoseStamped targetTransfer(double x, double y, double z, geometry_msgs::Quaternion yaw);
-
 	bool checkPositionError(double error, geometry_msgs::PoseStamped target); // check offset between current position from odometry and setpoint position to decide when drone reached setpoint
-	bool checkPositionError(double error, geometry_msgs::PoseStamped current, geometry_msgs::PoseStamped target); // check offset between current position and setpoint position to decide when drone reached setpoint
 	bool checkOrientationError(double error, geometry_msgs::PoseStamped current, geometry_msgs::PoseStamped target); // check offset between current orientation and setpoint orientation to decide when drone reached setpoint
-
-	bool checkGPSError(double error, sensor_msgs::NavSatFix current, sensor_msgs::NavSatFix goal); // check offset between current GPS and setpoint GPS to decide when drone reached setpoint
-
-	Eigen::Vector3d getRPY(geometry_msgs::Quaternion quat); // get roll, pitch and yaw angle from quaternion
-	// geometry_msgs::Quaternion getQuaternionMsg(double roll, double pitch, double yaw); // create quaternion msg from roll, pitch and yaw
-	
 	double distanceBetween(geometry_msgs::PoseStamped current, geometry_msgs::PoseStamped target); // calculate distance between current position and setpoint position
 	geometry_msgs::Vector3 velComponentsCalc(double v_desired, geometry_msgs::PoseStamped current, geometry_msgs::PoseStamped target); // calculate components of velocity about x, y, z axis
 
 	void dequeueFlight();
 	// void fillTheStack(int size, );
-	
+	void pushIdxToStack(std::stack<int> &stack);
 
 };
-
-
-
-
-double yaw_;
-// Eigen::Affine3d current_pose_ = Eigen::Affine3d::Identity();
-// Eigen::Vector3d current_velocity_ = Eigen::Vector3d::Zero();
 
 #endif

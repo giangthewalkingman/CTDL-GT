@@ -1,7 +1,7 @@
 <launch>
     <arg name="delivery" default="true"/>
     <arg name="simulation" default="true"/>
-    <arg name="return_home" default="false"/>
+    <arg name="return_home" default="true"/>
     <arg name="desired_velocity" default="0.7"/>
     <arg name="hover_time" default="5.0"/>
     <arg name="unpack_time" default="5.0"/>

@@ -10,20 +10,13 @@ OffboardControl::OffboardControl(const ros::NodeHandle &nh, const ros::NodeHandl
                                                                                                                       return_home_mode_enable_(false) {
     state_sub_ = nh_.subscribe("/mavros/state", 10, &OffboardControl::stateCallback, this);
     odom_sub_ = nh_.subscribe("/mavros/local_position/odom", 10, &OffboardControl::odomCallback, this);
-    // gps_position_sub_ = nh_.subscribe("/mavros/global_position/global", 10, &OffboardControl::gpsPositionCallback, this);
     setpoint_pose_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_position/local", 10);
     odom_error_pub_ = nh_.advertise<nav_msgs::Odometry>("odom_error", 1, true);
     arming_client_ = nh_.serviceClient<mavros_msgs::CommandBool>("/mavros/cmd/arming");
     set_mode_client_ = nh_.serviceClient<mavros_msgs::SetMode>("/mavros/set_mode");
-
     nh_private_.param<bool>("/offboard_node/simulation_mode_enable", simulation_mode_enable_, simulation_mode_enable_);
     nh_private_.param<bool>("/offboard_node/delivery_mode_enable", delivery_mode_enable_, delivery_mode_enable_);
     nh_private_.param<bool>("/offboard_node/return_home_mode_enable", return_home_mode_enable_, return_home_mode_enable_);
-    nh_private_.getParam("/offboard_node/number_of_target", num_of_enu_target_);
-    nh_private_.getParam("/offboard_node/target_error", target_error_);
-    // nh_private_.getParam("/offboard_node/target_x_pos", x_target_);
-    // nh_private_.getParam("/offboard_node/target_y_pos", y_target_);
-    // nh_private_.getParam("/offboard_node/target_z_pos", z_target_);
     nh_private_.getParam("/offboard_node/z_takeoff", z_takeoff_);
     nh_private_.getParam("/offboard_node/z_delivery", z_delivery_);
     nh_private_.getParam("/offboard_node/land_error", land_error_);
@@ -31,15 +24,12 @@ OffboardControl::OffboardControl(const ros::NodeHandle &nh, const ros::NodeHandl
     nh_private_.getParam("/offboard_node/hover_time", hover_time_);
     nh_private_.getParam("/offboard_node/unpack_time", unpack_time_);
     nh_private_.getParam("/offboard_node/desired_velocity", vel_desired_);
-    nh_private_.getParam("/offboard_node/land_velocity", land_vel_);
-    nh_private_.getParam("/offboard_node/return_velcity", return_vel_);
-
-    nh_private_.getParam("/offboard_node/yaw_rate", yaw_rate_);
+    // nh_private_.getParam("/offboard_node/yaw_rate", yaw_rate_);
     nh_private_.getParam("/offboard_node/odom_error", odom_error_);
 
     waitForPredicate(10.0);
     if (input_setpoint) {
-        inputSetpoint();
+        inputENUYawAndLandingSetpoint();
     }
 }
 
@@ -79,7 +69,7 @@ void OffboardControl::waitForPredicate(double hz) {
 /* send a few setpoints before publish
    input: ros rate in hertz (at least 2Hz) and first setpoint */
 void OffboardControl::setOffboardStream(double hz, geometry_msgs::PoseStamped first_target) {
-    home_enu_pose_ = targetTransfer(current_odom_.pose.pose.position.x, current_odom_.pose.pose.position.y, current_odom_.pose.pose.position.z, yaw_);
+    home_enu_pose_ = targetTransfer(current_odom_.pose.pose.position.x, current_odom_.pose.pose.position.y, current_odom_.pose.pose.position.z);
     ros::Rate rate(hz);
     std::printf("[ INFO] Setting OFFBOARD stream \n");
     for (int i = 50; ros::ok() && i > 0; --i) {
@@ -147,77 +137,35 @@ void OffboardControl::stateCallback(const mavros_msgs::State::ConstPtr &msg) {
 
 void OffboardControl::odomCallback(const nav_msgs::Odometry::ConstPtr &msg) {
     current_odom_ = *msg;
-    yaw_ = tf::getYaw(current_odom_.pose.pose.orientation); //for "Rotating.."
-    // std::std::cout << "\n[Debug] yaw from odom: " << degreeOf(yaw_) << "\n";
 }
-
-/* manage input: select mode, setpoint type, ... */
-void OffboardControl::inputSetpoint() {
-    std::printf("\n[ INFO] Please choose mode\n");
-    char mode;
-    std::printf("- Choose (1): Mission\n");
-    std::printf("(1): ");
-    std::cin >> mode;
-
-    // // hovering
-    if (mode == '1') {
-        std::printf("Mission with ENU setpoint & Yaw & Landing at setpoint\n");
-            inputENUYawAndLandingSetpoint();
-        }
-        else {
-            std::printf("\n[ WARN] Not available mode\n");
-            // inputSetpoint();
-        }
-}
-
 
 void OffboardControl::inputENUYawAndLandingSetpoint() {
     ros::Rate rate(10.0);
-    char c;
-    std::printf("- Choose 1: Manual enter from keyboard\n");
-    std::printf("(1): ");
-    std::cin >> c;
-    if (c == '1') {
-        double x, y, z, yaw;
-        std::printf("[ INFO] Manual enter ENU target position(s) to drop packages\n");
-        std::printf(" Number of target(s): ");
-        std::cin >> num_of_enu_target_;
-        for (int i = 0; i < num_of_enu_target_; i++) {
-            std::printf(" Target (%d) postion x, y, z (in meter): ", i + 1);
-            std::cin >> x >> y >> z;
-            geometry_msgs::PoseStamped point_to_push;
-            point_to_push.pose.position.x = x;
-            point_to_push.pose.position.y = y;
-            point_to_push.pose.position.z = z;
-            targets.push_back(point_to_push);
-            //yaw_target_.push_back(yaw);
-            //std::cin >> targets[i].pose.position.x >> targets[i].pose.position.y >> targets[i].pose.position.z;
-            std::cout << "Point to push " << i <<": " << point_to_push.pose.position.x << ", " << point_to_push.pose.position.y << ", " << point_to_push.pose.position.z << std::endl;
-            std::cout << "Target " << i <<": " << targets[i].pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i].pose.position.z << std::endl;
-            ros::spinOnce();
-            rate.sleep();
-        }
-        for(int i = 0; i < num_of_enu_target_; i++) {
-            std::cout << "Target " << i <<": " << targets[i].pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i].pose.position.z << std::endl;
-        }
-        std::printf(" Error to check target reached (in meter): ");
-        std::cin >> target_error_;
+    double x, y, z, yaw;
+    std::printf("[ INFO] Manual enter ENU target position(s) to drop packages\n");
+    std::printf(" Number of target(s): ");
+    std::cin >> num_of_enu_target_;
+    for (int i = 0; i < num_of_enu_target_; i++) {
+        std::printf(" Target (%d) postion x, y, z (in meter): ", i + 1);
+        std::cin >> x >> y >> z;
+        geometry_msgs::PoseStamped point_to_push;
+        point_to_push.pose.position.x = x;
+        point_to_push.pose.position.y = y;
+        point_to_push.pose.position.z = z;
+        targets.push_back(point_to_push);
+        //yaw_target_.push_back(yaw);
+        //std::cin >> targets[i].pose.position.x >> targets[i].pose.position.y >> targets[i].pose.position.z;
+        std::cout << "Point to push " << i <<": " << point_to_push.pose.position.x << ", " << point_to_push.pose.position.y << ", " << point_to_push.pose.position.z << std::endl;
+        std::cout << "Target " << i <<": " << targets[i].pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i].pose.position.z << std::endl;
+        ros::spinOnce();
+        rate.sleep();
     }
-    else {
-        // inputENUYawAndLandingSetpoint();
+    for(int i = 0; i < num_of_enu_target_; i++) {
+        std::cout << "Target " << i <<": " << targets[i].pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i].pose.position.z << std::endl;
     }
-    //Create a stack containing up to 10 packages
-    int A[] = {22, 34, 56, 84, 32, 10, 12, 33, 23, 10};
-    // std::stack<int> myStack;
-    for(int i = 0; i < 10; i++) {
-        myStack.push(A[i]);
-    }
-    // std::cout << "Print the stack" << std::endl;
-    // for(int i = 0; i < 10; i++) {
-    //     // std::cout << "Print the stack" << std::endl;
-    //     std::cout << myStack.top() << std::endl;
-    //     myStack.pop();
-    // }
+    std::printf(" Error to check target reached (in meter): ");
+    std::cin >> target_error_;
+    pushIdxToStack(myStack);
     setOffboardStream(10.0, targetTransfer(current_odom_.pose.pose.position.x, current_odom_.pose.pose.position.y, z_takeoff_));
     waitForArmAndOffboard(10.0);
     takeOff(targetTransfer(current_odom_.pose.pose.position.x, current_odom_.pose.pose.position.y, z_takeoff_), takeoff_hover_time_);
@@ -301,40 +249,6 @@ void OffboardControl::dequeueFlight() {
     
 }
 
-// inputENUYawAndLandingSetpoint
-
-
-/* transfer x, y, z setpoint to same message type with enu setpoint msg
-   input: x, y, z that want to create geometry_msgs::PoseStamped msg */
-geometry_msgs::PoseStamped OffboardControl::targetTransfer(double x, double y, double z) {
-    geometry_msgs::PoseStamped target;
-    target.pose.position.x = x;
-    target.pose.position.y = y;
-    target.pose.position.z = z;
-    //target.pose.orientation = 0;
-    return target;
-}
-
-/* transfer x, y, z (meter) and yaw (degree) setpoint to same message type with enu setpoint msg
-   input: x, y, z in meter and yaw in degree that want to create geometry_msgs::PoseStamped msg */
-geometry_msgs::PoseStamped OffboardControl::targetTransfer(double x, double y, double z, double yaw) {
-    geometry_msgs::PoseStamped target;
-    target.pose.position.x = x;
-    target.pose.position.y = y;
-    target.pose.position.z = z;
-    target.pose.orientation = tf::createQuaternionMsgFromYaw(radianOf(yaw));
-    return target;
-}
-
-geometry_msgs::PoseStamped OffboardControl::targetTransfer(double x, double y, double z, geometry_msgs::Quaternion yaw) {
-    geometry_msgs::PoseStamped target;
-    target.pose.position.x = x;
-    target.pose.position.y = y;
-    target.pose.position.z = z;
-    target.pose.orientation = yaw;
-    return target;
-}
-
 
 /* calculate distance between current position and setpoint position
    input: current and target poses (ENU) to calculate distance */
@@ -399,12 +313,17 @@ void OffboardControl::takeOff(geometry_msgs::PoseStamped setpoint, double hover_
     }
 }
 
+geometry_msgs::PoseStamped OffboardControl::targetTransfer(double x, double y, double z) {
+    geometry_msgs::PoseStamped target;
+    target.pose.position.x = x;
+    target.pose.position.y = y;
+    target.pose.position.z = z;
+    return target;
+}
+
 /* perform hover task
    input: setpoint to hover and hover time */
 void OffboardControl::hovering(geometry_msgs::PoseStamped setpoint, double hover_time) {
-    // setpoint.header.stamp = ros::Time::now();
-    // ROS_INFO_STREAM(setpoint);
-    // std::cout << "Hover time is: " << hover_time << std::endl;
     ros::Rate rate(10.0);
     ros::Time t_check;
 
@@ -531,6 +450,14 @@ bool OffboardControl::checkPositionError(double error, geometry_msgs::PoseStampe
     return (geo_error.norm() < error) ? true : false;
 }
 
+void OffboardControl::pushIdxToStack(std::stack<int> &stack) {
+    int *A = new int[num_of_enu_target_];
+    std::cout << "Input the index: " << std::endl;
+    for(int i = 0; i < num_of_enu_target_; i++) {
+        std::cin >> A[i];
+        stack.push(A[i]);
+    }
+}
 
 /////////// QUEUE
 
