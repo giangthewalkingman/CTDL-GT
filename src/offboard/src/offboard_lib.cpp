@@ -18,24 +18,21 @@ OffboardControl::OffboardControl(const ros::NodeHandle &nh, const ros::NodeHandl
     nh_private_.getParam("/offboard_node/z_takeoff", z_takeoff_);
     nh_private_.getParam("/offboard_node/z_delivery", z_delivery_);
     nh_private_.getParam("/offboard_node/land_error", land_error_);
-    nh_private_.getParam("/offboard_node/takeoff_hover_time", takeoff_hover_time_);
     nh_private_.getParam("/offboard_node/hover_time", hover_time_);
     nh_private_.getParam("/offboard_node/unpack_time", unpack_time_);
     nh_private_.getParam("/offboard_node/desired_velocity", vel_desired_);
-    // nh_private_.getParam("/offboard_node/yaw_rate", yaw_rate_);
     nh_private_.getParam("/offboard_node/odom_error", odom_error_);
 
     waitForPredicate(10.0);
-    if (input_setpoint) {
-        inputENUYawAndLandingSetpoint();
-    }
+    dequeueFlight();
 }
 
+//destructor
 OffboardControl::~OffboardControl() {
 
 }
 
-/* wait for connect, GPS received, ...
+/* wait for connect
    input: ros rate in hertz, at least 2Hz */
 void OffboardControl::waitForPredicate(double hz) {
     ros::Rate rate(hz);
@@ -134,12 +131,17 @@ void OffboardControl::odomCallback(const nav_msgs::Odometry::ConstPtr &msg) {
     current_odom_ = *msg;
 }
 
-void OffboardControl::inputENUYawAndLandingSetpoint() {
+void OffboardControl::dequeueFlight() {
     ros::Rate rate(10.0);
+    bool target_reached = true;
+    int i = 0;
+    geometry_msgs::PoseStamped setpoint;
     double x, y, z, yaw;
     std::printf("[ INFO] Manual enter ENU target position(s) to drop packages\n");
     std::printf(" Number of target(s): ");
     std::cin >> num_of_enu_target_;
+    ArrayQueue q1(num_of_enu_target_);
+    std::cout << "Start to enqueue each setpoint to the queue..." << std::endl;
     for (int i = 0; i < num_of_enu_target_; i++) {
         std::printf(" Target (%d) postion x, y, z (in meter): ", i + 1);
         std::cin >> x >> y >> z;
@@ -147,42 +149,19 @@ void OffboardControl::inputENUYawAndLandingSetpoint() {
         point_to_push.pose.position.x = x;
         point_to_push.pose.position.y = y;
         point_to_push.pose.position.z = z;
-        targets.push_back(point_to_push); //push back the pose to the targets vector
+        q1.enQueue(point_to_push);
         ros::spinOnce();
         rate.sleep();
     }
-    for(int i = 0; i < num_of_enu_target_; i++) {
-        std::cout << "Target " << i+1 <<": " << targets[i].pose.position.x << ", " << targets[i].pose.position.y << ", " << targets[i].pose.position.z << std::endl;
-    }
+    std::cout << "Enqueue completed!" << std::endl;
+    q1.printQueue();
     std::printf(" Error to check target reached (in meter): ");
     std::cin >> target_error_;
     pushIdxToStack(myStack);
     setOffboardStream(10.0, targetTransfer(current_odom_.pose.pose.position.x, current_odom_.pose.pose.position.y, z_takeoff_));
     waitForArmAndOffboard(10.0);
-    takeOff(targetTransfer(current_odom_.pose.pose.position.x, current_odom_.pose.pose.position.y, z_takeoff_), takeoff_hover_time_);
+    takeOff(targetTransfer(current_odom_.pose.pose.position.x, current_odom_.pose.pose.position.y, z_takeoff_), hover_time_);
     std::printf("\n[ INFO] Flight with ENU setpoint and Yaw angle\n");
-    // enuYawFlightAndLandingSetpoint();
-    dequeueFlight();
-}
-
-
-void OffboardControl::dequeueFlight() {
-    ros::Rate rate(10.0);
-    bool target_reached = true;
-    ArrayQueue q1(num_of_enu_target_);
-    int i = 0;
-    geometry_msgs::PoseStamped setpoint;
-    std::cout << "Start to enqueue each setpoint to the queue..." << std::endl;
-    // for(i = 0; i < num_of_enu_target_; i++) {
-    //     q1.enQueue(targets[i]);
-    // }
-    for(auto tar : targets) {
-        q1.enQueue(tar);
-    }
-    std::cout << "Enqueue completed!" << std::endl;
-    // q1.printQueue();
-    std::cout << "Start dequeueing..." << std::endl;
-    i = 0;
     while (ros::ok() && target_reached) {
         std::cout << "Dequeueing point " << i+1 << std::endl;
         target_reached = false;
@@ -217,7 +196,6 @@ void OffboardControl::dequeueFlight() {
                 {
                     delivery(setpoint, unpack_time_);
                 }
-                std::printf("\n[ INFO] Next target: [%.1f, %.1f, %.1f]\n", targets[i+1].pose.position.x, targets[i+1].pose.position.y, targets[i+1].pose.position.z);
                 i += 1;
                 break;
             }
@@ -256,7 +234,9 @@ double OffboardControl::distanceBetween(geometry_msgs::PoseStamped current, geom
 }
 
 /* calculate components of velocity about x, y, z axis
-   input: desired velocity, current and target poses (ENU) */
+   input: desired velocity, current and target poses (ENU)
+   key: vx/v = dx/d
+    */
 geometry_msgs::Vector3 OffboardControl::velComponentsCalc(double v_desired, geometry_msgs::PoseStamped current, geometry_msgs::PoseStamped target) {
     double xc = current.pose.position.x;
     double yc = current.pose.position.y;
@@ -501,6 +481,7 @@ void ArrayQueue::printQueue() {
     std::cout << "The queue is printed!" << std::endl;
 }
 
+//two functions to check whether the queue is empty or not
 bool ArrayQueue::isFull() {
     if((rear - front + 1) == cap) {
         std::cout << "The queue is full" << std::endl;
